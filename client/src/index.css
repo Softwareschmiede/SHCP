@@ -1,0 +1,10 @@
+#content {
+    margin: 20px 15px 0 15px;
+}
+
+.global-message {
+    position: absolute !important;
+    width: 350px;
+    min-height: 50px !important;
+    right: 5px;
+}

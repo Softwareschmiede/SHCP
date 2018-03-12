@@ -1,0 +1,12 @@
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.top-right {
+    top: 7px;
+    right: 7px;
+}
