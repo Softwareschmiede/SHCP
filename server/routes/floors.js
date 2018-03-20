@@ -35,7 +35,7 @@ router.post('/', function (req, res, next) {
 
 /* UPDATE FLOOR */
 router.put('/:id', function (req, res, next) {
-    Floor.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+    Floor.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, post) => {
         if (err) return next(err);
 
         res.json(post);

@@ -2,10 +2,11 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import update from 'react-addons-update';
 import { Card, Input, Button } from 'semantic-ui-react';
 
 // Actions
-import { createFloor } from '../../../actions/floors.action';
+import { createFloor, updateFloor } from '../../../actions/floors.action';
 
 // import './rooms.css';
 
@@ -14,16 +15,37 @@ class FloorSettings extends React.Component {
         super(props);
 
         // State
-        this.state = { floorName: '' };
+        this.state = { floors: this.props.floors };
+
+        console.log('Constructor');
 
         // Functions
-        this.updateFloorName = this.updateFloorName.bind(this);
+        this.updateHandler = this.updateHandler.bind(this);
+        this.updateFloor = this.updateFloor.bind(this);
         this.createNewFloor = this.createNewFloor.bind(this);
         this.resetInput = this.resetInput.bind(this);
+        this.showFloors = this.showFloors.bind(this);
     }
 
-    updateFloorName(event) {
-        this.setState({ floorName: event.target.value });
+    // componentWillReceiveProps(props) {
+    //     console.log('New Props');
+    //     this.setState({ floors: props.floors });
+    // }
+
+    updateHandler(e) {
+        const index = this.state.floors.findIndex(element => element._id === e.target.id);
+
+        const floors = update(this.state.floors, {
+            [index]: {
+                [e.target.name]: { $set: e.target.value },
+            },
+        });
+
+        this.setState({ floors });
+    }
+
+    updateFloor(e) {
+        this.props.updateFloor({ _id: e.target.id, [e.target.name]: e.target.value }, this.props.token);
     }
 
     createNewFloor() {
@@ -33,6 +55,20 @@ class FloorSettings extends React.Component {
 
     resetInput() {
         this.setState({ floorName: '' });
+    }
+
+    showFloors() {
+        return this.state.floors.map(floor => (
+            <Card key={floor._id}>
+                <Card.Content>
+                    <Card.Header>
+                        <Input id={floor._id} name="name" value={floor.name} size="mini" transparent fluid onChange={e => this.updateHandler(e)} onBlur={e => this.updateFloor(e)} />
+                    </Card.Header>
+                    <Card.Description>Räume: 1</Card.Description>
+                    <Card.Description>Geräte: 5</Card.Description>
+                </Card.Content>
+            </Card>
+        ));
     }
 
     render() {
@@ -51,15 +87,7 @@ class FloorSettings extends React.Component {
                             </Card.Header>
                         </Card.Content>
                     </Card>
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>
-                                <Input defaultValue="Stockwerk 1" size="mini" transparent fluid />
-                            </Card.Header>
-                            <Card.Description>Räume: 1</Card.Description>
-                            <Card.Description>Geräte: 5</Card.Description>
-                        </Card.Content>
-                    </Card>
+                    {this.showFloors()}
                 </Card.Group>
             </div>
         );
@@ -69,11 +97,12 @@ class FloorSettings extends React.Component {
 function mapStateToProps(state) {
     return {
         token: state.token,
+        floors: state.floors,
     };
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ createFloor }, dispatch);
+    return bindActionCreators({ createFloor, updateFloor }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(FloorSettings);

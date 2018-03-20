@@ -21,7 +21,7 @@ import Login from './components/login';
 // Settings
 import FloorSettings from './components/settings/floors/Floors';
 import RoomSettings from './components/settings/room';
-import DevicesSettings from './components/settings/devices/Devices';
+import DevicesSettings from './components/settings/devices';
 import DeviceSettings from './components/settings/device/Device';
 
 // Actions
@@ -51,8 +51,8 @@ ReactDOM.render(
                         <Redirect exact from="/" to="/dashboard" />
                         <Route exact path="/dashboard" component={RequireAuth(Dashboard)} />
                         <Route exact path="/floors" component={RequireAuth(Floors)} />
-                        <Route exact path="/rooms" component={RequireAuth(Rooms)} />
-                        <Route exact path="/rooms/:id" component={RequireAuth(Room)} />
+                        {/*<Route exact path="/rooms" component={RequireAuth(Rooms)} />*/}
+                        <Route exact path="/room/:id" component={RequireAuth(Room)} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/settings/floors" component={RequireAuth(FloorSettings)} />
                         <Route exact path="/settings/rooms" component={RequireAuth(RoomSettings)} />
