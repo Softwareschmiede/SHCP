@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "start database.bat && nodemon ./bin/www"
+        "start": "start database.bat && nodemon ./bin/www",
+        "init": "start init.bat"
     },
     "dependencies": {
         "auth-header": "^0.3.1",

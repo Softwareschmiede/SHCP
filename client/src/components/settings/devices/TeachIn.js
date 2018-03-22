@@ -1,5 +1,10 @@
 import React from 'react';
-import { Message, Accordion, Icon } from 'semantic-ui-react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Message, Accordion, Button, Icon } from 'semantic-ui-react';
+
+// Actions
+import { activateTeachmode } from '../../../actions/teach.action';
 
 class DeviceTeachIn extends React.Component {
     constructor(props) {
@@ -7,6 +12,12 @@ class DeviceTeachIn extends React.Component {
 
         this.state = { floors: [{ key: 'floor1', value: 'floor1', text: 'Floor 1' }], rooms: [] };
     }
+
+    componentWillMount() {
+        console.log('Started');
+        this.props.activateTeachmode(this.props.token);
+    }
+
     render() {
         return (
             <div id="teachIn">
@@ -15,6 +26,8 @@ class DeviceTeachIn extends React.Component {
                     <Message.Content>
                         <Message.Header>Press Teach-In Button</Message.Header>
                         Press the Teach-In button of your new device.
+                        <Button color='orange'>Manuel</Button>
+                        <Button color='red'>Stop</Button>
                     </Message.Content>
                 </Message>
 
@@ -35,4 +48,14 @@ class DeviceTeachIn extends React.Component {
     }
 }
 
-export default DeviceTeachIn;
+function mapStateToProps(state) {
+    return {
+        token: state.token,
+    };
+}
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ activateTeachmode }, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(DeviceTeachIn);

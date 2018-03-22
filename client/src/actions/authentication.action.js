@@ -37,18 +37,17 @@ export function validate(token) {
         const headers = { Authorization: `Bearer ${token}` };
 
         axios.get(`${process.env.REACT_APP_SERVER_URL}/validate`, { headers }).then((res) => {
-            if (res.status !== 200) {
-                dispatch({
-                    type: AUTHENTICATION_ERROR,
-                    payload: null,
-                });
-            } else {
+            console.log(res);
+            if (res.status === 200) {
                 dispatch({
                     type: AUTHENTICATED,
                     payload: token,
                 });
-
-                // history.push('/dashboard');
+            } else {
+                dispatch({
+                    type: AUTHENTICATION_ERROR,
+                    payload: null,
+                });
             }
         }).catch((error) => {
             console.log(error);

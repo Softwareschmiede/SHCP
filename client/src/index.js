@@ -14,7 +14,7 @@ import RequireAuth from './components/hoc';
 import Navigation from './components/navigation/Navigation';
 import Dashboard from './components/dashboard/Dashboard';
 import Floors from './components/floors/Floors';
-import Rooms from './components/rooms/Rooms';
+// import Rooms from './components/rooms/Rooms';
 import Room from './components/room';
 import Login from './components/login';
 
@@ -36,6 +36,7 @@ const token = localStorage.getItem('token');
 
 if (token) {
     // Init
+    console.log('validate');
     store.dispatch(validate(token));
     store.dispatch(loadFloors(token));
     store.dispatch(loadRooms(token));
@@ -45,6 +46,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <div id="shcp">
+                {console.log('rendered')}
                 <Navigation />
                 <div id="content">
                     <Switch>
