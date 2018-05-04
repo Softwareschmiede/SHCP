@@ -21,7 +21,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/shcp').then(() => { console.log('Connected'); }).catch((err) => { console.error(err); });
 
 // EPC
-// var epc = require('./epc');
+var epc = require('./epc');
 
 var app = express();
 

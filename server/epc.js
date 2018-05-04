@@ -14,3 +14,5 @@ controller.on('new-device', (device) => {
 controller.on('known-device', (device) => {
     console.log('Known device: ' + device);
 });
+
+module.exports = controller;
