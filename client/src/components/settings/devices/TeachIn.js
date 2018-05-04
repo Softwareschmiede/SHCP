@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Message, Accordion, Button, Icon } from 'semantic-ui-react';
+import { Message, Accordion, Button, Input, Icon } from 'semantic-ui-react';
 
 // Actions
 import { activateTeachmode } from '../../../actions/teach.action';
@@ -26,21 +26,21 @@ class DeviceTeachIn extends React.Component {
                     <Message.Content>
                         <Message.Header>Press Teach-In Button</Message.Header>
                         Press the Teach-In button of your new device.
-                        <Button color='orange'>Manuel</Button>
+                        <Button color='orange'>Manually</Button>
                         <Button color='red'>Stop</Button>
                     </Message.Content>
                 </Message>
 
                 <Accordion defaultActiveIndex={0} styled fluid>
-                    <Accordion.Title index={0} onClick={this.handleClick}>
+                    <Accordion.Title index={0} active={true} onClick={this.handleClick}>
                         <Icon name="dropdown" />
-                        What is a dog?
+                        12345678
                     </Accordion.Title>
-                    <Accordion.Content>
-                        <p>
-                            A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a
-                            {' '}welcome guest in many households across the world.
-                        </p>
+                    <Accordion.Content active={true}>
+                        <Input label="Name" placeholder="" />
+                        <Input label="Name" placeholder="" />
+                        <Input label="Name" placeholder="" />
+                        <Input label="Name" placeholder="" />
                     </Accordion.Content>
                 </Accordion>
             </div>
