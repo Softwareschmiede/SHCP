@@ -17,4 +17,8 @@ controller.on('known-device', (device) => {
     console.log('Known device: ' + device);
 });
 
+controller.on('esp-error', (err) => {
+    console.log(err);
+});
+
 module.exports = controller;
