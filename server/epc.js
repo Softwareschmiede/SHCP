@@ -1,7 +1,7 @@
 var EPC = require('epc');
 var Device = require('./models/Device');
 
-const controller = new EPC({ port: '/dev/ttyAMA0' });
+const controller = new EPC({ port: '/dev/ttyAMA0', bausRate: 57600 });
 
 controller.on('new-device', (device) => {
     console.log('New Device');
