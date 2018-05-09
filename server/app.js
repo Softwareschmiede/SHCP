@@ -22,6 +22,7 @@ mongoose.connect('mongodb://localhost/shcp').then(() => { console.log('Connected
 
 // EPC
 var epc = require('./epc');
+epc.open();
 
 var app = express();
 

@@ -4,6 +4,8 @@ var Device = require('./models/Device');
 const controller = new EPC();
 
 controller.on('new-device', (device) => {
+    console.log('New Device');
+
     Device.create(device, (err, post) => {
         if (err) console.log(err);
 
