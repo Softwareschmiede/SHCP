@@ -18,7 +18,7 @@ var rooms = require('./routes/rooms');
 
 // Database connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/shcp').then(() => { console.log('Connected'); }).catch((err) => { console.error(err); });
+mongoose.connect('mongodb://localhost/shcp', { useMongoClient: true }).then(() => { console.log('Connected'); }).catch((err) => { console.error(err); });
 
 // EPC
 var epc = require('./epc');
